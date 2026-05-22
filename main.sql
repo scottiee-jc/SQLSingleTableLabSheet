@@ -13,3 +13,17 @@ INSERT INTO pet (name,owner,species,sex,checkups,birth,death)VALUES ('Fluffy','H
 SELECT * FROM pet
 
 SELECT * FROM pet WHERE sex = 'm';
+
+SELECT name, species, sex FROM pet WHERE species = 'snake' OR species = 'bird';
+
+SELECT name, owner FROM pet WHERE sex = 'f';
+
+SELECT name, birth FROM pet WHERE species = 'dog';
+
+SELECT owner FROM pet WHERE species = 'bird';
+
+SELECT species FROM pet WHERE sex = 'f';
+
+SELECT name, birth FROM pet WHERE species = 'cat' OR species = 'bird';
+
+SELECT name, species FROM pet WHERE species = 'cat' OR species = 'bird' AND sex = 'f';
