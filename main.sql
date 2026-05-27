@@ -38,3 +38,18 @@ SELECT owner FROM pet WHERE SUBSTR(UPPER(owner), 1, 1) BETWEEN 'A' AND 'E' AND S
 
 SELECT owner FROM pet WHERE SUBSTR(owner, 1, 1) BETWEEN 'A' AND 'E' AND SUBSTR(owner, LENGTH(owner), 1) BETWEEN 'A' AND 'E';
 
+SELECT AVG(total_checkups) AS avg_checkups_per_owner
+FROM (
+    SELECT owner, SUM(checkups) AS total_checkups
+    FROM pet
+    GROUP BY owner
+);
+
+SELECT species, COUNT(*) AS species_count
+FROM pet 
+GROUP BY species
+ORDER BY species_count ASC;
+
+SELECT owner, COUNT(species_per_owner_count) AS species_per_owner_count
+FROM pet
+GROUP BY owner;
