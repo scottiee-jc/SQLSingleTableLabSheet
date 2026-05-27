@@ -27,3 +27,14 @@ SELECT species FROM pet WHERE sex = 'f';
 SELECT name, birth FROM pet WHERE species = 'cat' OR species = 'bird';
 
 SELECT name, species FROM pet WHERE species = 'cat' OR species = 'bird' AND sex = 'f';
+
+SELECT owner, name FROM pet WHERE name LIKE '%er' OR name LIKE '%all';
+
+SELECT name FROM pet WHERE owner LIKE '%e';
+
+SELECT name FROM pet WHERE length(owner) = 4;  
+
+SELECT owner FROM pet WHERE SUBSTR(UPPER(owner), 1, 1) BETWEEN 'A' AND 'E' AND SUBSTR(UPPER(owner), LENGTH(owner), 1) BETWEEN 'A' AND 'E';
+
+SELECT owner FROM pet WHERE SUBSTR(owner, 1, 1) BETWEEN 'A' AND 'E' AND SUBSTR(owner, LENGTH(owner), 1) BETWEEN 'A' AND 'E';
+
