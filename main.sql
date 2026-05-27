@@ -38,6 +38,7 @@ SELECT owner FROM pet WHERE SUBSTR(UPPER(owner), 1, 1) BETWEEN 'A' AND 'E' AND S
 
 SELECT owner FROM pet WHERE SUBSTR(owner, 1, 1) BETWEEN 'A' AND 'E' AND SUBSTR(owner, LENGTH(owner), 1) BETWEEN 'A' AND 'E';
 
+ -- Q3-1
 SELECT AVG(total_checkups) AS avg_checkups_per_owner
 FROM (
     SELECT owner, SUM(checkups) AS total_checkups
@@ -45,11 +46,45 @@ FROM (
     GROUP BY owner
 );
 
+ -- Q3-2
 SELECT species, COUNT(*) AS species_count
 FROM pet 
 GROUP BY species
 ORDER BY species_count ASC;
 
-SELECT owner, COUNT(species_per_owner_count) AS species_per_owner_count
+ -- Q3-3
+SELECT owner,
+       species,
+       COUNT(*) AS pet_count
+FROM pet
+GROUP BY owner, species
+ORDER BY owner ASC, species ASC;
+
+ -- Q3-4
+SELECT owner, COUNT(DISTINCT species) AS species_count
 FROM pet
 GROUP BY owner;
+
+-- Q5
+SELECT sex, COUNT(*) AS pet_by_gender
+FROM pet
+WHERE sex IN ('m', 'f')
+GROUP BY sex
+ORDER BY sex ASC;
+
+
+ -- Q3-6
+SELECT o.owner,
+       COALESCE(b.bird_count, 0) AS bird_count
+FROM (SELECT DISTINCT owner FROM pet) AS o
+LEFT JOIN (
+    SELECT owner, COUNT(*) AS bird_count
+    FROM pet
+    WHERE species = 'bird'
+    GROUP BY owner
+) AS b
+ON o.owner = b.owner
+ORDER BY o.owner;
+
+-- Q3-7
+SELECT owner, SUM(checkups) AS checkups_per_owner FROM pet GROUP BY owner;
